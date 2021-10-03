@@ -24,16 +24,13 @@ public class Handler implements RequestHandler<List<Request>, String> {
 
 		LambdaLogger logger = context.getLogger();
 		logger.log("\nInput => " + gson.toJson(requestJson));
-		logger.log("\nContext => " + gson.toJson(context));
-		logger.log("\n\n\n");
 
 		// 1. Parse the Input JSON request.
 		for (Request request : requestJson) {
 
 			int priority = request.getPriority();
 			logger.log("\nPriority: " + String.valueOf(priority));
-			logger.log("\n");
-
+			
 			// 2. Find out the SQS queue URL based on the priority.
 			String sqsQueueUrl = "";
 			if (priority == 2) {
@@ -56,7 +53,6 @@ public class Handler implements RequestHandler<List<Request>, String> {
 			logger.log("\nMessage ID: " + sendMessageResponse.messageId());
 		}
 		
-		logger.log("\n");
 		return "Processed successfully";
 	}
 }
