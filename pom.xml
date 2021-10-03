@@ -45,14 +45,6 @@
 			<artifactId>apache-client</artifactId>
 			<version>${aws.java.sdk.version}</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
-		<!-- <dependency>
-			<artifactId>netty-nio-client</artifactId>
-			<groupId>software.amazon.awssdk</groupId>
-			<version>${aws.java.sdk.version}</version>$NO-MVN-MAN-VER$
-			<scope>runtime</scope>
-		</dependency> -->
-		<!-- <dependency> <groupId>org.apache.poi</groupId> <artifactId>poi-ooxml</artifactId> 
-			<version>3.11</version> </dependency> -->
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>

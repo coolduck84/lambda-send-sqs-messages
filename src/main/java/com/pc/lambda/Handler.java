@@ -45,7 +45,8 @@ public class Handler implements RequestHandler<List<Request>, String> {
 			} else if (priority == 16) {
 				sqsQueueUrl = System.getenv("sixteenHrTATQueue");
 			}
-
+			logger.log("\nSQS Queue URL: " + sqsQueueUrl);
+			
 			// 3. Send the message to the appropriate queue.
 			SqsClient sqsClient = SqsClient.builder().region(Region.US_EAST_1).build();
 			SendMessageRequest sendMessageRequest = SendMessageRequest.builder().queueUrl(sqsQueueUrl)
@@ -54,7 +55,8 @@ public class Handler implements RequestHandler<List<Request>, String> {
 
 			logger.log("\nMessage ID: " + sendMessageResponse.messageId());
 		}
-
+		
+		logger.log("\n");
 		return "Processed successfully";
 	}
 }
