@@ -30,7 +30,7 @@ public class Handler implements RequestHandler<List<Request>, String> {
 
 			int priority = request.getPriority();
 			logger.log("\nPriority: " + String.valueOf(priority));
-			
+
 			// 2. Find out the SQS queue URL based on the priority.
 			String sqsQueueUrl = "";
 			if (priority == 2) {
@@ -43,16 +43,16 @@ public class Handler implements RequestHandler<List<Request>, String> {
 				sqsQueueUrl = System.getenv("sixteenHrTATQueue");
 			}
 			logger.log("\nSQS Queue URL: " + sqsQueueUrl);
-			
+
 			// 3. Send the message to the appropriate queue.
 			SqsClient sqsClient = SqsClient.builder().region(Region.US_EAST_1).build();
 			SendMessageRequest sendMessageRequest = SendMessageRequest.builder().queueUrl(sqsQueueUrl)
-					.messageBody(gson.toJson(request)).build();
+					.messageGroupId(String.valueOf(priority)).messageBody(gson.toJson(request)).build();
 			SendMessageResponse sendMessageResponse = sqsClient.sendMessage(sendMessageRequest);
 
 			logger.log("\nMessage ID: " + sendMessageResponse.messageId());
 		}
-		
+
 		return "Processed successfully";
 	}
 }
